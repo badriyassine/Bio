@@ -119,8 +119,9 @@ const MusicPlayer = () => {
       </div>
 
       {/* RIGHT: VOLUME CONTROL */}
+      {/* RIGHT: VOLUME CONTROL - Added 'hidden lg:flex' */}
       <div
-        className="flex flex-col items-center gap-2 px-2"
+        className="hidden lg:flex flex-col items-center gap-2 px-2"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="relative h-16 w-8 flex items-center justify-center group/vol">
