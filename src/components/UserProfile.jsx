@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import avatarImg from "/avatar/avatar.jpg";
 import StatusIndicator from "./StatusIndicator";
 import MusicPlayer from "./MusicPlayer";
@@ -15,6 +15,10 @@ import {
 const UserProfile = () => {
   const words = ["YassiNe", "ERROR"];
   const [index, setIndex] = useState(0);
+  
+  // 1. Create refs for both videos
+  const bgVideoRef = useRef(null);
+  const bannerVideoRef = useRef(null);
 
   const hobbies = [
     {
@@ -43,6 +47,22 @@ const UserProfile = () => {
     },
   ];
 
+  // 2. Force playback on mount using useEffect
+  useEffect(() => {
+    const playVideo = (videoRef) => {
+      if (videoRef.current) {
+        videoRef.current.defaultMuted = true;
+        videoRef.current.muted = true;
+        videoRef.current.play().catch((error) => {
+          console.warn("Autoplay prevented by browser:", error);
+        });
+      }
+    };
+
+    playVideo(bgVideoRef);
+    playVideo(bannerVideoRef);
+  }, []);
+
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prevIndex) => (prevIndex + 1) % words.length);
@@ -52,11 +72,13 @@ const UserProfile = () => {
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-[#050505] overflow-hidden relative p-4 lg:p-10">
-      {/* Background Video */}
+      {/* Background Video - Added ref and defaultMuted */}
       <video
+        ref={bgVideoRef}
         autoPlay
         loop
         muted
+        defaultMuted
         playsInline
         className="absolute inset-0 w-full h-full object-cover z-0"
       >
@@ -75,12 +97,14 @@ const UserProfile = () => {
       <div className="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-12 gap-6 relative z-10">
         {/* LEFT COLUMN: IDENTITY */}
         <div className="lg:col-span-4 rounded-2xl border border-white/5 backdrop-blur-3xl bg-black/60 shadow-2xl overflow-hidden flex flex-col">
-          {/* VIDEO BANNER */}
+          {/* VIDEO BANNER - Added ref and defaultMuted */}
           <div className="h-40 w-full relative">
             <video
+              ref={bannerVideoRef}
               autoPlay
               loop
               muted
+              defaultMuted
               playsInline
               poster="/banner/drift.jpg"
               className="w-full h-full object-cover opacity-70"
@@ -107,7 +131,6 @@ const UserProfile = () => {
               </span>
             </div>
 
-            {/* RESTORED DESCRIPTION */}
             <p className="text-center text-xs text-slate-400 leading-relaxed font-medium tracking-wide mb-6">
               Full-Stack Dev <span className="text-red-500/50">•</span> Gamer{" "}
               <span className="text-red-500/50">•</span> Midnight Mode
