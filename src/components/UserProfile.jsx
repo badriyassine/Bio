@@ -58,7 +58,7 @@ const UserProfile = () => {
         loop
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover z-0 "
+        className="absolute inset-0 w-full h-full object-cover z-0"
       >
         <source src="/video/video.mp4" type="video/mp4" />
       </video>
@@ -82,6 +82,7 @@ const UserProfile = () => {
               loop
               muted
               playsInline
+              poster="/banner/drift.jpg"
               className="w-full h-full object-cover opacity-70"
             >
               <source src="/video/drift.mp4" type="video/mp4" />
