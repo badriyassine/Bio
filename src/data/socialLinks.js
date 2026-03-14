@@ -1,0 +1,61 @@
+import {
+  FaDiscord,
+  FaGithub,
+  FaSpotify,
+  FaInstagram,
+} from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+
+export const socialLinksData = [
+  {
+    id: 1,
+    name: "instagram",
+    link: "https://www.instagram.com/yassine_.dev",
+    icon: FaInstagram,
+    iconColor: "text-pink-400",
+    bgColor: "bg-indigo-950/20",
+    borderColor: "border-pink-400",
+    glow: "hover:shadow-[0_0_20px_rgba(99,102,241,0.5)]",
+  },
+  {
+    id: 2,
+    name: "x",
+    link: "https://x.com/yassine_o2", 
+    icon: FaXTwitter, 
+    iconColor: "text-white",
+    bgColor: "bg-white/5",
+    borderColor: "border-white/20",
+    glow: "hover:shadow-[0_0_20px_rgba(255,255,255,0.2)]",
+  },
+  {
+    id: 3,
+    name: "discord",
+    link: "https://discord.com/users/1325979065269882914",
+    icon: FaDiscord,
+    iconColor: "text-indigo-400",
+    bgColor: "bg-indigo-950/20",
+    borderColor: "border-indigo-500",
+    glow: "hover:shadow-[0_0_20px_rgba(99,102,241,0.5)]",
+  },
+  {
+    id: 4,
+    name: "github",
+    link: "https://github.com/badriyassine",
+    icon: FaGithub,
+    iconColor: "text-teal-300",
+    bgColor: "bg-teal-950/20",
+    borderColor: "border-teal-400",
+    showTooltip: true,
+    glow: "hover:shadow-[0_0_20px_rgba(45,212,191,0.5)]",
+  },
+  {
+    id: 5,
+    name: "spotify",
+    link: "https://open.spotify.com/user/31t52zcahfamxhyfsssn3i3lbyx4",
+    icon: FaSpotify,
+    iconColor: "text-green-400",
+    bgColor: "bg-green-950/20",
+    borderColor: "border-green-500",
+    glow: "hover:shadow-[0_0_20px_rgba(74,222,128,0.5)]",
+  },
+];
