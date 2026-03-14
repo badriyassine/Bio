@@ -15,7 +15,7 @@ import {
 const UserProfile = () => {
   const words = ["YassiNe", "ERROR"];
   const [index, setIndex] = useState(0);
-  
+
   // 1. Create refs for both videos
   const bgVideoRef = useRef(null);
   const bannerVideoRef = useRef(null);
@@ -71,8 +71,8 @@ const UserProfile = () => {
   }, []);
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-[#050505] overflow-hidden relative p-4 lg:p-10">
-      {/* Background Video - Added ref and defaultMuted */}
+    <div className="min-h-[100dvh] w-full flex items-center justify-center bg-transparent overflow-x-hidden relative p-4 lg:p-10">
+      {/* 2. The Background Video */}
       <video
         ref={bgVideoRef}
         autoPlay
@@ -80,7 +80,7 @@ const UserProfile = () => {
         muted
         defaultMuted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover z-0"
+        className="fixed inset-0 w-full h-full object-cover z-[-1]"
       >
         <source src="/video/video.mp4" type="video/mp4" />
       </video>
