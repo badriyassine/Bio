@@ -16,49 +16,26 @@ const UserProfile = () => {
   const words = ["YassiNe", "ERROR"];
   const [index, setIndex] = useState(0);
 
-  // 1. Create refs for both videos
+  // Refs for both videos
   const bgVideoRef = useRef(null);
   const bannerVideoRef = useRef(null);
 
   const hobbies = [
-    {
-      name: "Coding",
-      desc: "Building Systems",
-      icon: FaCode,
-      color: "text-red-500",
-    },
-    {
-      name: "Photography",
-      desc: "Cinematic Shots",
-      icon: FaCamera,
-      color: "text-red-500",
-    },
-    {
-      name: "Trucking",
-      desc: "Atlas Logistics",
-      icon: FaTruck,
-      color: "text-red-500",
-    },
-    {
-      name: "Gaming",
-      desc: "Midnight Setup",
-      icon: FaGamepad,
-      color: "text-red-500",
-    },
+    { name: "Coding", desc: "Building Systems", icon: FaCode, color: "text-red-500" },
+    { name: "Photography", desc: "Cinematic Shots", icon: FaCamera, color: "text-red-500" },
+    { name: "Trucking", desc: "Atlas Logistics", icon: FaTruck, color: "text-red-500" },
+    { name: "Gaming", desc: "Midnight Setup", icon: FaGamepad, color: "text-red-500" },
   ];
 
-  // 2. Force playback on mount using useEffect
+  // Combined video playback logic
   useEffect(() => {
     const playVideo = (videoRef) => {
       if (videoRef.current) {
         videoRef.current.defaultMuted = true;
         videoRef.current.muted = true;
-        videoRef.current.play().catch((error) => {
-          console.warn("Autoplay prevented by browser:", error);
-        });
+        videoRef.current.play().catch((err) => console.warn("Autoplay blocked:", err));
       }
     };
-
     playVideo(bgVideoRef);
     playVideo(bannerVideoRef);
   }, []);
@@ -71,19 +48,23 @@ const UserProfile = () => {
   }, []);
 
   return (
-    <div className="min-h-[100dvh] w-full flex items-center justify-center bg-transparent overflow-x-hidden relative p-4 lg:p-10">
-      {/* 2. The Background Video */}
-      <video
-        ref={bgVideoRef}
-        autoPlay
-        loop
-        muted
-        defaultMuted
-        playsInline
-        className="fixed inset-0 w-full h-full object-cover z-[-1]"
-      >
-        <source src="/video/video.mp4" type="video/mp4" />
-      </video>
+    <div className="min-h-[100dvh] w-full flex items-center justify-center bg-black overflow-x-hidden relative p-4 lg:p-10">
+      
+      {/* 1. BLURRED BACKGROUND VIDEO (Hides low quality) */}
+      <div className="fixed inset-0  overflow-hidden">
+        <video
+          ref={bgVideoRef}
+          autoPlay
+          loop
+          muted
+          defaultMuted
+          playsInline
+          className="w-full h-full object-cover opacity-90 blur-sm scale-110"
+        >
+          <source src="/video/video.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-black/10"></div>
+      </div>
 
       <style>{`
         @keyframes typing { 0%, 10% { width: 0 } 40%, 60% { width: 100% } 90%, 100% { width: 0 } }
@@ -97,8 +78,9 @@ const UserProfile = () => {
       <div className="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-12 gap-6 relative z-10">
         {/* LEFT COLUMN: IDENTITY */}
         <div className="lg:col-span-4 rounded-2xl border border-white/5 backdrop-blur-3xl bg-black/60 shadow-2xl overflow-hidden flex flex-col">
-          {/* VIDEO BANNER - Added ref and defaultMuted */}
-          <div className="h-40 w-full relative">
+          
+          {/* 2. VIDEO BANNER (Restored) */}
+          <div className="h-40 w-full relative overflow-hidden">
             <video
               ref={bannerVideoRef}
               autoPlay
@@ -106,7 +88,6 @@ const UserProfile = () => {
               muted
               defaultMuted
               playsInline
-              // poster="/banner/drift.jpg"
               className="w-full h-full object-cover opacity-70"
             >
               <source src="/video/drift.mp4" type="video/mp4" />
@@ -147,58 +128,39 @@ const UserProfile = () => {
 
         {/* RIGHT COLUMN */}
         <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* HOBBIES CARD: BIGGER ICONS */}
           <div className="p-8 rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur-xl flex flex-col">
             <div className="flex items-center gap-3 text-red-500 mb-8 font-black text-[10px] uppercase tracking-[0.4em]">
               <FaTerminal size={14} /> Interests
             </div>
             <div className="grid grid-cols-2 gap-4 flex-1">
               {hobbies.map((hobby, i) => (
-                <div
-                  key={i}
-                  className="flex flex-col items-center justify-center p-6 rounded-2xl bg-black/40 border border-white/5 group hover:border-red-600/30 transition-all"
-                >
-                  <hobby.icon
-                    className={`${hobby.color} text-4xl mb-4 group-hover:scale-110 transition-transform duration-500`}
-                  />
-                  <div className="text-[11px] font-black text-white uppercase tracking-tighter">
-                    {hobby.name}
-                  </div>
-                  <div className="text-[9px] text-slate-500 uppercase tracking-widest">
-                    {hobby.desc}
-                  </div>
+                <div key={i} className="flex flex-col items-center justify-center p-6 rounded-2xl bg-black/40 border border-white/5 group hover:border-red-600/30 transition-all">
+                  <hobby.icon className={`${hobby.color} text-4xl mb-4 group-hover:scale-110 transition-transform duration-500`} />
+                  <div className="text-[11px] font-black text-white uppercase tracking-tighter">{hobby.name}</div>
+                  <div className="text-[9px] text-slate-500 uppercase tracking-widest">{hobby.desc}</div>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* ATLAS IMAGE CARD */}
           <div className="rounded-2xl border border-white/5 bg-black/40 backdrop-blur-xl overflow-hidden relative group">
             <img
               src="/image/workstation.jpeg"
               className="w-full h-full object-cover opacity-70 group-hover:scale-110 transition-transform duration-[5000ms]"
-              alt="VTC"
+              alt="Workstation"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent p-8 flex flex-col justify-end">
-              <span className="text-blue-500 font-black text-[10px] uppercase tracking-[0.4em] mb-2">
-                Visual Feed
-              </span>
-              <h3 className="text-2xl font-black text-white italic uppercase tracking-tighter">
-                The Work Station
-              </h3>
+              <span className="text-blue-500 font-black text-[10px] uppercase tracking-[0.4em] mb-2">Visual Feed</span>
+              <h3 className="text-2xl font-black text-white italic uppercase tracking-tighter">The Work Station</h3>
             </div>
           </div>
 
-          {/* TERMINAL: LOADING ONLY */}
           <div className="md:col-span-2 p-10 rounded-2xl border border-white/5 bg-black shadow-inner relative overflow-hidden">
             <div className="relative z-10 font-mono">
               <div className="flex items-center gap-3 mb-8">
                 <div className="w-3 h-3 rounded-full bg-red-600 shadow-[0_0_10px_#ef4444]"></div>
-                <span className="text-xs text-slate-500 tracking-[0.2em] uppercase">
-                  Kernel // Sub-System
-                </span>
+                <span className="text-xs text-slate-500 tracking-[0.2em] uppercase">Kernel // Sub-System</span>
               </div>
-
               <div className="space-y-4">
                 <div className="flex justify-between text-[10px] text-red-500 font-black uppercase tracking-widest mb-2">
                   <span>Initializing Modules...</span>
@@ -208,19 +170,12 @@ const UserProfile = () => {
                   <div className="loader-bar absolute top-0 left-0 h-full"></div>
                 </div>
                 <div className="pt-4 text-slate-600 text-[11px] space-y-1">
-                  <p className="animate-pulse">
-                    {" "}
-                    {">"} Loading assets/cinematic_engine.dll...
-                  </p>
-                  <p className="opacity-50">
-                    {" "}
-                    {">"} Establishing secure connection to Morocco_DB...
-                  </p>
-                  <p className="opacity-30"> {">"} Bypassing firewall...</p>
+                  <p className="animate-pulse">{">"} Loading assets/cinematic_engine.dll...</p>
+                  <p className="opacity-50">{">"} Establishing secure connection to Morocco_DB...</p>
+                  <p className="opacity-30">{">"} Bypassing firewall...</p>
                 </div>
               </div>
             </div>
-            {/* Visual Scanline Effect */}
             <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-white/[0.02] to-transparent h-20 w-full animate-[scan_4s_linear_infinite]"></div>
           </div>
         </div>
