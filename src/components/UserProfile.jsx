@@ -15,8 +15,6 @@ import {
 const UserProfile = () => {
   const words = ["YassiNe", "ERROR"];
   const [index, setIndex] = useState(0);
-  const [showBannerVideo, setShowBannerVideo] = useState(false);
-  const [isLowPower, setIsLowPower] = useState(false);
 
   // 1. Create refs for both videos
   const bgVideoRef = useRef(null);
@@ -49,24 +47,12 @@ const UserProfile = () => {
     },
   ];
 
-  // 2. Detect low-power device or slow connection
-  useEffect(() => {
-    const connection = navigator.connection;
-    if (connection && (connection.saveData || connection.effectiveType === "4g")) {
-      setIsLowPower(true);
-    }
-  }, []);
-
-  // 3. Force playback on mount with optimized settings
+  // 2. Force playback on mount using useEffect
   useEffect(() => {
     const playVideo = (videoRef) => {
       if (videoRef.current) {
         videoRef.current.defaultMuted = true;
         videoRef.current.muted = true;
-        // For mobile, reduce frame rate
-        if (window.innerWidth < 768) {
-          videoRef.current.style.filter = "blur(0px)";
-        }
         videoRef.current.play().catch((error) => {
           console.warn("Autoplay prevented by browser:", error);
         });
@@ -74,26 +60,9 @@ const UserProfile = () => {
     };
 
     playVideo(bgVideoRef);
+    playVideo(bannerVideoRef);
   }, []);
 
-  // 4. Lazy load banner video after 800ms
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowBannerVideo(true);
-      // Play banner video after a small delay
-      if (bannerVideoRef.current) {
-        bannerVideoRef.current.defaultMuted = true;
-        bannerVideoRef.current.muted = true;
-        bannerVideoRef.current.play().catch((error) => {
-          console.warn("Banner video autoplay prevented:", error);
-        });
-      }
-    }, 800);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  // 5. Word animation effect
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prevIndex) => (prevIndex + 1) % words.length);
@@ -103,7 +72,7 @@ const UserProfile = () => {
 
   return (
     <div className="min-h-[100dvh] w-full flex items-center justify-center bg-transparent overflow-x-hidden relative p-4 lg:p-10">
-      {/* BACKGROUND VIDEO - OPTIMIZED */}
+      {/* 2. The Background Video */}
       <video
         ref={bgVideoRef}
         autoPlay
@@ -111,14 +80,10 @@ const UserProfile = () => {
         muted
         defaultMuted
         playsInline
-        preload="auto"
         className="fixed inset-0 w-full h-full object-cover z-[-1]"
       >
         <source src="/video/video.mp4" type="video/mp4" />
       </video>
-
-      {/* Dark overlay for better readability */}
-      <div className="fixed inset-0 bg-black/30 z-[-1]"></div>
 
       <style>{`
         @keyframes typing { 0%, 10% { width: 0 } 40%, 60% { width: 100% } 90%, 100% { width: 0 } }
@@ -127,48 +92,26 @@ const UserProfile = () => {
         .writing-text { display: inline-block; overflow: hidden; white-space: nowrap; border-right: 3px solid #ef4444; margin: 0 auto; position: absolute; left: 50%; transform: translateX(-50%); animation: typing 4s steps(15, end) infinite; }
         .loader-bar { height: 2px; background: #ef4444; animation: loading 2s ease-in-out infinite; box-shadow: 0 0 10px #ef4444; }
         @keyframes loading { 0% { width: 0%; left: 0% } 50% { width: 100%; left: 0% } 100% { width: 0%; left: 100% } }
-        
-        /* Reduce blur on mobile */
-        @media (max-width: 768px) {
-          .backdrop-blur-md {
-            backdrop-filter: blur(4px);
-          }
-          .blur-reduce {
-            backdrop-filter: blur(0px) !important;
-          }
-        }
       `}</style>
 
       <div className="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-12 gap-6 relative z-10">
         {/* LEFT COLUMN: IDENTITY */}
-        <div className="lg:col-span-4 rounded-2xl border border-white/5 backdrop-blur-md bg-black/60 shadow-2xl overflow-hidden flex flex-col">
-          {/* VIDEO BANNER - LAZY LOADED */}
-          <div className="h-40 w-full relative bg-black/40">
-            {showBannerVideo ? (
-              <>
-                <video
-                  ref={bannerVideoRef}
-                  autoPlay
-                  loop
-                  muted
-                  defaultMuted
-                  playsInline
-                  preload="metadata"
-                  poster="/banner/drift.jpg"
-                  className="w-full h-full object-cover opacity-70"
-                >
-                  <source src="/video/drift.mp4" type="video/mp4" />
-                </video>
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
-              </>
-            ) : (
-              // Fallback poster image
-              <img
-                src="/banner/drift.jpg"
-                className="w-full h-full object-cover opacity-70"
-                alt="banner"
-              />
-            )}
+        <div className="lg:col-span-4 rounded-2xl border border-white/5 backdrop-blur-3xl bg-black/60 shadow-2xl overflow-hidden flex flex-col">
+          {/* VIDEO BANNER - Added ref and defaultMuted */}
+          <div className="h-40 w-full relative">
+            <video
+              ref={bannerVideoRef}
+              autoPlay
+              loop
+              muted
+              defaultMuted
+              playsInline
+              // poster="/banner/drift.jpg"
+              className="w-full h-full object-cover opacity-70"
+            >
+              <source src="/video/drift.mp4" type="video/mp4" />
+            </video>
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
           </div>
 
           <div className="px-8 pb-10 flex-1 flex flex-col items-center">
@@ -205,7 +148,7 @@ const UserProfile = () => {
         {/* RIGHT COLUMN */}
         <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* HOBBIES CARD: BIGGER ICONS */}
-          <div className="p-8 rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur-md flex flex-col">
+          <div className="p-8 rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur-xl flex flex-col">
             <div className="flex items-center gap-3 text-red-500 mb-8 font-black text-[10px] uppercase tracking-[0.4em]">
               <FaTerminal size={14} /> Interests
             </div>
@@ -213,10 +156,10 @@ const UserProfile = () => {
               {hobbies.map((hobby, i) => (
                 <div
                   key={i}
-                  className="flex flex-col items-center justify-center p-6 rounded-2xl bg-black/40 border border-white/5 group hover:border-red-600/30 transition-all duration-300"
+                  className="flex flex-col items-center justify-center p-6 rounded-2xl bg-black/40 border border-white/5 group hover:border-red-600/30 transition-all"
                 >
                   <hobby.icon
-                    className={`${hobby.color} text-4xl mb-4 group-hover:scale-110 transition-transform duration-300`}
+                    className={`${hobby.color} text-4xl mb-4 group-hover:scale-110 transition-transform duration-500`}
                   />
                   <div className="text-[11px] font-black text-white uppercase tracking-tighter">
                     {hobby.name}
@@ -230,12 +173,11 @@ const UserProfile = () => {
           </div>
 
           {/* ATLAS IMAGE CARD */}
-          <div className="rounded-2xl border border-white/5 bg-black/40 backdrop-blur-md overflow-hidden relative group">
+          <div className="rounded-2xl border border-white/5 bg-black/40 backdrop-blur-xl overflow-hidden relative group">
             <img
               src="/image/workstation.jpeg"
-              className="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity duration-500"
+              className="w-full h-full object-cover opacity-70 group-hover:scale-110 transition-transform duration-[5000ms]"
               alt="VTC"
-              loading="lazy"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent p-8 flex flex-col justify-end">
               <span className="text-blue-500 font-black text-[10px] uppercase tracking-[0.4em] mb-2">
@@ -278,8 +220,8 @@ const UserProfile = () => {
                 </div>
               </div>
             </div>
-            {/* Visual Scanline Effect - Optimized */}
-            <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-white/[0.02] to-transparent h-20 w-full animate-[scan_6s_linear_infinite] opacity-30"></div>
+            {/* Visual Scanline Effect */}
+            <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-white/[0.02] to-transparent h-20 w-full animate-[scan_4s_linear_infinite]"></div>
           </div>
         </div>
       </div>
