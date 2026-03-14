@@ -1,5 +1,4 @@
 import Profile from "../components/UserProfile"
-// 1. Import your video file (ensure this path is correct for your project)
 import myBackgroundVideo from '/video/video.mp4';
 
 const Home = () => {
@@ -9,9 +8,9 @@ const Home = () => {
       
       {/* 3. Video Element with Tailwind utility classes */}
       <video 
-        autoPlay // Starts automatically (Required camelCase in React)
-        loop     // Loops the video
-        muted    // Crucial: Must be muted for autoplay to work in modern browsers
+        autoPlay 
+        loop     
+        muted   
         className="absolute bottom-0 right-0 min-w-full min-h-full w-auto h-auto z-[-1] object-cover"
       >
         <source src={myBackgroundVideo} type="video/mp4" />
