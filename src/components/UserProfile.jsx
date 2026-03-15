@@ -77,7 +77,7 @@ const UserProfile = () => {
 
       <div className="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-12 gap-6 relative z-10">
         {/* LEFT COLUMN: IDENTITY */}
-        <div className="lg:col-span-4 rounded-2xl border border-white/5 backdrop-blur-3xl bg-black/60 shadow-2xl overflow-hidden flex flex-col">
+        <div className="lg:col-span-4 rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur-xl  shadow-2xl overflow-hidden flex flex-col">
           
           {/* 2. VIDEO BANNER (Restored) */}
           <div className="h-40 w-full relative overflow-hidden">
@@ -155,7 +155,7 @@ const UserProfile = () => {
             </div>
           </div>
 
-          <div className="md:col-span-2 p-10 rounded-2xl border border-white/5 bg-black shadow-inner relative overflow-hidden">
+          <div className="md:col-span-2 p-10 rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur-xl shadow-inner relative overflow-hidden">
             <div className="relative z-10 font-mono">
               <div className="flex items-center gap-3 mb-8">
                 <div className="w-3 h-3 rounded-full bg-red-600 shadow-[0_0_10px_#ef4444]"></div>

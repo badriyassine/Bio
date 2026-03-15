@@ -65,7 +65,7 @@ const MusicPlayer = () => {
   return (
     <div
       onClick={togglePlay}
-      className="w-full max-w-md mx-auto mb-10 flex items-center justify-between p-4 rounded-2xl bg-black/60 border border-white/5 backdrop-blur-3xl shadow-2xl group transition-all duration-500 hover:border-red-500/30 cursor-pointer select-none"
+      className="w-full max-w-md mx-auto mb-10 flex items-center justify-between p-4 rounded-2xl bg-black/50 border border-white/5 backdrop-blur-3xl shadow-2xl group transition-all duration-500 hover:border-red-500/30 cursor-pointer select-none"
     >
       <audio
         ref={audioRef}
