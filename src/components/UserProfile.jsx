@@ -5,6 +5,7 @@ import StatusIndicator from "./StatusIndicator";
 import SocialGrid from "./SocialGrid";
 import ProfileStats from "./ProfileStats";
 import VibeStatus from "./VibeStatus";
+import MusicPlayer from "../components/MusicPlayer";
 
 const UserProfile = () => {
   const words = ["YassiNe", "ERROR"];
@@ -123,6 +124,9 @@ const UserProfile = () => {
 
             {/* REMOVED EXTRA CARDS, FOCUSING ON MAIN UTILITIES */}
             <div className="w-full  space-y-8 max-w-md">
+              <div className=" sm:block md:hidden">
+                <MusicPlayer/>
+              </div>
               <VibeStatus/>
               <SocialGrid />
               <ProfileStats />

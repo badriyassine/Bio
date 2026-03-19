@@ -68,7 +68,7 @@ const MusicPlayer = () => {
       />
 
       {/* FIXED TOP-RIGHT CONTROLLER */}
-      <div className="fixed top-6 right-6 z-[100] flex items-center gap-3 bg-black/40 backdrop-blur-md border border-white/10 p-3 rounded-full shadow-2xl transition-all hover:border-gray-300/10 group">
+      <div className="fixed top-2 right-2 sm:top-4 sm:right-4 z-[100] flex items-center gap-3 bg-black/40 backdrop-blur-md border border-white/10 p-3 rounded-full  shadow-2xl transition-all hover:border-gray-300/10 group">
         
         {/* PLAY/PAUSE ICON */}
         <button 
@@ -95,7 +95,7 @@ const MusicPlayer = () => {
         </div>
 
         {/* SMALL VISUALIZER DOTS */}
-        <div className="flex gap-0.5 h-3 items-end pr-1">
+        <div className="flex gap-0.5 h-3 items-end  pr-1">
           {[1, 2, 3].map((i) => (
             <div
               key={i}
