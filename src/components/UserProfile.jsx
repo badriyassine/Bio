@@ -52,7 +52,6 @@ const UserProfile = () => {
         >
           <source src="/video/video.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-black/40"></div>
       </div>
 
       <style>{`
@@ -74,19 +73,10 @@ const UserProfile = () => {
 
       {/* CENTERED PROFILE CARD CONTAINER */}
       <div className="w-full max-w-2xl relative z-10 flex flex-col items-center">
-        <div className="w-full rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur-md shadow-2xl overflow-hidden flex flex-col">
-          {/* BANNER IMAGE */}
-          <div className="h-48 w-full relative overflow-hidden">
-            <img
-              src="/banner/banner.jpg" // Change this to your actual image path
-              alt="Profile Banner"
-              className="w-full h-full object-cover opacity-70"
-            />
-            {/* The gradient overlay keeps the transition to the avatar smooth */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-          </div>
+        <div className="w-full rounded-2xl border border-white/5 bg-black/20 backdrop-blur-sm shadow-2xl overflow-hidden flex flex-col">
+          
 
-          <div className="px-8 pb-10 flex-1 flex flex-col items-center">
+          <div className="px-8 mt-30 pb-10 flex-1 flex flex-col items-center">
             {/* AVATAR WITH PURPLE AURA GLOW */}
             <div className="relative -mt-20 mb-6 group">
               <div className="absolute -inset-4 bg-gray-600/10 rounded-full blur-2xl animate-pulse"></div>

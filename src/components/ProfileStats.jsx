@@ -15,8 +15,8 @@ const ProfileStats = () => {
           </p>
           <span className="w-8 h-[1px] bg-gradient-to-l from-transparent to-gray-200/50"></span>
         </div>
-        <div className="text-[7px] text-slate-700 font-mono tracking-tighter opacity-50">
-          BUILD_V2.0.26 - MOROCCO_CORE
+        <div className="text-[7px] text-slate-300 font-mono tracking-tighter opacity-50">
+          BUILD_BMW - MOROCCO_CORE
         </div>
       </div>
     </div>
