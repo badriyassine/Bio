@@ -68,17 +68,17 @@ const MusicPlayer = () => {
       />
 
       {/* FIXED TOP-RIGHT CONTROLLER */}
-      <div className="fixed top-4 right-4 z-[100] flex items-center gap-3 bg-black/40 backdrop-blur-md border border-white/10 p-3 rounded-xl  shadow-2xl transition-all hover:border-gray-300/10 group">
+      <div className="fixed top-4 right-4 z-[100] flex items-center gap-3 bg-black/50 backdrop-blur-sm border border-white/10 p-3 rounded-xl  shadow-2xl transition-all hover:border-gray-300/10 group">
         
         {/* PLAY/PAUSE ICON */}
         <button 
           onClick={togglePlay}
-          className="w-8 h-8 flex items-center justify-center cursor-pointer rounded-full bg-gray-600/30 hover:bg-gray-600/40 transition-colors"
+          className="w-8 h-8 flex items-center justify-center cursor-pointer rounded-full bg-gray-500/30 hover:bg-gray-600/40 transition-colors"
         >
           {isPlaying ? (
-            <FaVolumeUp className="text-gray-100 text-xs animate-pulse" />
+            <FaVolumeUp className="text-white text-xs animate-pulse" />
           ) : (
-            <FaVolumeMute className="text-slate-500 text-xs" />
+            <FaVolumeMute className="text-white text-xs" />
           )}
         </button>
 
