@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-import avatarImg from "/avatar/avatar.png";
+import avatarImg from "/avatar/avatar.jpg";
 import StatusIndicator from "./StatusIndicator";
 import SocialGrid from "./SocialGrid";
 import ProfileStats from "./ProfileStats";
