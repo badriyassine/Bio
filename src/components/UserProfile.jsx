@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 
-import avatarImg from "/avatar/avatar.png"; 
+import avatarImg from "/avatar/avatar.png";
 import StatusIndicator from "./StatusIndicator";
 import SocialGrid from "./SocialGrid";
 import ProfileStats from "./ProfileStats";
 import VibeStatus from "./VibeStatus";
-import MusicPlayer from "../components/MusicPlayer";
 
 const UserProfile = () => {
   const words = ["YassiNe", "ERROR"];
@@ -42,14 +41,12 @@ const UserProfile = () => {
 
   return (
     <div className="min-h-[100dvh] w-full flex items-center justify-center bg-black overflow-x-hidden relative p-4 lg:p-10">
-      
       {/* 1. BACKGROUND VIDEO (Blurred to create Atmosphere) */}
       <div className="fixed inset-0 overflow-hidden">
         <video
           ref={bgVideoRef}
           autoPlay
           loop
-          
           playsInline
           className="w-full h-full object-cover opacity-60 scale-110 blur-"
         >
@@ -77,9 +74,7 @@ const UserProfile = () => {
 
       {/* CENTERED PROFILE CARD CONTAINER */}
       <div className="w-full max-w-2xl relative z-10 flex flex-col items-center">
-        
         <div className="w-full rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur-md shadow-2xl overflow-hidden flex flex-col">
-          
           {/* BANNER VIDEO */}
           <div className="h-48 w-full relative overflow-hidden">
             <video
@@ -124,10 +119,7 @@ const UserProfile = () => {
 
             {/* REMOVED EXTRA CARDS, FOCUSING ON MAIN UTILITIES */}
             <div className="w-full  space-y-8 max-w-md">
-              <div className=" sm:block md:hidden">
-                <MusicPlayer/>
-              </div>
-              <VibeStatus/>
+              <VibeStatus />
               <SocialGrid />
               <ProfileStats />
             </div>
