@@ -10,7 +10,7 @@ const ProfileStats = () => {
           <span className="w-8 h-[1px] bg-gradient-to-r from-transparent to-gray-200/50"></span>
           <p className="text-[9px] font-mono text-slate-500 uppercase tracking-[0.3em]">
             Created by{" "}
-            <span className="text-white font-black animate-pulse">𝐀𝐮𝐫𝐞𝐥𝐢𝐮𝐬</span>{" "}
+            <span className="text-white font-black animate-pulse">Aurelius</span>{" "}
             with <FaHeart className="inline text-white mb-0.5" size={8} />
           </p>
           <span className="w-8 h-[1px] bg-gradient-to-l from-transparent to-gray-200/50"></span>
