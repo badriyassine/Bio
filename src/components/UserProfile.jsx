@@ -7,7 +7,7 @@ import ProfileStats from "./ProfileStats";
 import VibeStatus from "./VibeStatus";
 
 const UserProfile = () => {
-  const words = ["YassiNe", "ERROR"];
+  const words = ["𝐘𝐚𝐬𝐬𝐢𝐍𝐞", "𝐀𝐮𝐫𝐞𝐥𝐢𝐮𝐬"];
   const [index, setIndex] = useState(0);
 
   // Refs for both videos
