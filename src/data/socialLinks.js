@@ -14,7 +14,7 @@ export const socialLinksData = [
   {
     id: 2,
     name: "x",
-    link: "https://x.com/yassine_o2",
+    link: "https://x.com/ba_yassine_",
     icon: FaXTwitter,
     iconColor: "text-white",
     bgColor: "bg-white/5",
