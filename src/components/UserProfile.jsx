@@ -1,13 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 
-import avatarImg from "/avatar/avatar.png";
+import avatarImg from "/avatar/avatar.jpg";
 import StatusIndicator from "./StatusIndicator";
 import SocialGrid from "./SocialGrid";
 import ProfileStats from "./ProfileStats";
 import VibeStatus from "./VibeStatus";
 
 const UserProfile = () => {
-  const words = ["𝐘𝐚𝐬𝐬𝐢𝐍𝐞", "𝐀𝐮𝐫𝐞𝐥𝐢𝐮𝐬"];
+  const words = ["YassiNe", "Aurelius"];
   const [index, setIndex] = useState(0);
 
   // Refs for both videos
@@ -88,7 +88,7 @@ const UserProfile = () => {
             </div>
 
             {/* NAME / ERROR TEXT */}
-            <div className="typing-container text-white text-5xl font-bold tracking-tighter uppercase  mb-5">
+            <div className="typing-container text-white text-5xl font-bold tracking-tighter   mb-5">
               <span key={words[index]} className="writing-text">
                 {words[index]}
               </span>
