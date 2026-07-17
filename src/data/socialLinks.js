@@ -5,7 +5,7 @@ export const socialLinksData = [
   {
     id: 1,
     name: "instagram",
-    link: "https://www.instagram.com/yassine_.dev",
+    link: "https://www.instagram.com/_yassine_.b",
     icon: FaInstagram,
     iconColor: "text-white",
     bgColor: "bg-white/5",

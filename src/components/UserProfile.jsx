@@ -74,7 +74,7 @@ const UserProfile = () => {
       {/* CENTERED PROFILE CARD CONTAINER */}
       <div className="w-full max-w-2xl relative z-10 flex flex-col items-center">
         <div className="w-full rounded-2xl border border-white/5 bg-black/20 backdrop-blur-sm shadow-2xl overflow-hidden flex flex-col">
-          
+
 
           <div className="px-8 mt-30 pb-10 flex-1 flex flex-col items-center">
             {/* AVATAR WITH PURPLE AURA GLOW */}
